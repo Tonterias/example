@@ -1,0 +1,9 @@
+export enum Status {
+  INMACULATE = 'INMACULATE',
+
+  INCOURSE = 'INCOURSE',
+
+  NOTIFIED = 'NOTIFIED',
+
+  OTHER = 'OTHER',
+}

@@ -1,0 +1,11 @@
+{
+  "exampleApp": {
+    "Status": {
+      "null": "",
+      "INMACULATE": "INMACULATE",
+      "INCOURSE": "INCOURSE",
+      "NOTIFIED": "NOTIFIED",
+      "OTHER": "OTHER"
+    }
+  }
+}

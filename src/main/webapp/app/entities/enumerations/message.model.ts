@@ -1,0 +1,11 @@
+export enum Message {
+  MESSAGE1 = 'MESSAGE1',
+
+  MESSAGE2 = 'MESSAGE2',
+
+  MESSAGE3 = 'MESSAGE3',
+
+  MESSAGE4 = 'MESSAGE4',
+
+  MESSAGE5 = 'MESSAGE5',
+}

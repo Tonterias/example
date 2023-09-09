@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="notification">
+      <h2 data-cy="notificationDetailsHeading"><span jhiTranslate="exampleApp.notification.detail.title">Notification</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ notification.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="exampleApp.notification.date">Date</span></dt>
+        <dd>
+          <span>{{ notification.date | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="exampleApp.notification.message">Message</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'exampleApp.Message.' + notification.message }}">{{ notification.message }}</span>
+        </dd>
+        <dt><span jhiTranslate="exampleApp.notification.status">Status</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'exampleApp.Status.' + notification.status }}">{{ notification.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="exampleApp.notification.appuser">Appuser</span></dt>
+        <dd>
+          <div *ngIf="notification.appuser">
+            <a [routerLink]="['/appuser', notification.appuser.id, 'view']">{{ notification.appuser.plateNumber }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/notification', notification.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

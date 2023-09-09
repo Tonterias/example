@@ -1,0 +1,40 @@
+{
+  "applications": ["example"],
+  "changelogDate": "20230909111948",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "notification",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "Message",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MESSAGE1,MESSAGE2,MESSAGE3,MESSAGE4,MESSAGE5"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "INMACULATE,INCOURSE,NOTIFIED,OTHER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Notification",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "plateNumber",
+      "otherEntityName": "appuser",
+      "otherEntityRelationshipName": "notification",
+      "relationshipName": "appuser",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceImpl"
+}
