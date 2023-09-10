@@ -52,14 +52,14 @@ public class AppuserServiceImpl implements AppuserService {
         log.debug("Request to partially update Appuser : {}", appuserDTO);
 
         return appuserRepository
-            .findById(appuserDTO.getId())
-            .map(existingAppuser -> {
-                appuserMapper.partialUpdate(existingAppuser, appuserDTO);
+                .findById(appuserDTO.getId())
+                .map(existingAppuser -> {
+                    appuserMapper.partialUpdate(existingAppuser, appuserDTO);
 
-                return existingAppuser;
-            })
-            .map(appuserRepository::save)
-            .map(appuserMapper::toDto);
+                    return existingAppuser;
+                })
+                .map(appuserRepository::save)
+                .map(appuserMapper::toDto);
     }
 
     @Override
@@ -74,6 +74,20 @@ public class AppuserServiceImpl implements AppuserService {
     public Optional<AppuserDTO> findOne(Long id) {
         log.debug("Request to get Appuser : {}", id);
         return appuserRepository.findById(id).map(appuserMapper::toDto);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<AppuserDTO> findByPlateNumber(String plateNumber) {
+        log.debug("Request to get Appuser by plate number: {}", plateNumber);
+        Optional<Appuser> appuser = appuserRepository.findByPlateNumber(plateNumber);
+
+        if (appuser.isPresent()) {
+            AppuserDTO appuserDTO = appuserMapper.toDto(appuser.get());
+            return Optional.of(appuserDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

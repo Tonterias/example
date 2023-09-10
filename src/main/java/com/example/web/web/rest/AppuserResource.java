@@ -186,6 +186,21 @@ public class AppuserResource {
     }
 
     /**
+     * {@code GET  /appusers/:plateNumber} : get the "plateNumber" appuser.
+     *
+     * @param plateNumber the plateNumber of the appuserDTO to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the appuserDTO, or with status {@code 404 (Not Found)}.
+     */
+    // @GetMapping("/appusers/{plateNumber}")
+    @GetMapping("/appusers/plateNumber/{plateNumber}")
+    public ResponseEntity<AppuserDTO> getAppuserByPlateNumber(@PathVariable String plateNumber) {
+        log.debug("REST request to get Appuser : {}", plateNumber);
+        // QUESTION: Optional<AppuserDTO> appuserDTO = appuserService.findOne(id);
+        Optional<AppuserDTO> appuserDTO = appuserService.findByPlateNumber(plateNumber);
+        return ResponseUtil.wrapOrNotFound(appuserDTO);
+    }
+
+    /**
      * {@code DELETE  /appusers/:id} : delete the "id" appuser.
      *
      * @param id the id of the appuserDTO to delete.

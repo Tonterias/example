@@ -50,6 +50,15 @@ public interface AppuserService {
     Optional<AppuserDTO> findOne(Long id);
 
     /**
+     * Get the "plateNumber" appuser.
+     *
+     * @param plateNumber the id of the entity.
+     * @return the entity.
+     */
+    // QUESTION: Why do I have to use an Optional????
+    Optional<AppuserDTO> findByPlateNumber(String plateNumber);
+
+    /**
      * Delete the "id" appuser.
      *
      * @param id the id of the entity.
