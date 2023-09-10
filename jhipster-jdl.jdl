@@ -26,7 +26,7 @@ application {
 
 entity Appuser {
     date Instant required
-    plateNumber String required
+    plateNumber String required unique
     firstName String
     lastName String
     email String
