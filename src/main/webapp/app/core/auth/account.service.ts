@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -23,26 +24,22 @@ export class AccountService {
     private stateStorageService: StateStorageService,
     private router: Router,
     private applicationConfigService: ApplicationConfigService
-  ) {}
+  ) { }
 
   save(account: Account): Observable<{}> {
     return this.http.post(this.applicationConfigService.getEndpointFor('api/account'), account);
   }
 
-  specification() {
-  //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.contains=INCOURSE'));
-      return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.equals=INCOURSE'));
-  //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications/count'));
-    }
-     specificationCount() {
-    //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.contains=INCOURSE'));
-  //       return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.equals=INCOURSE'));
-        return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications/count'));
-      }
+  // specification() {
+  //   return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.equals=INCOURSE'));
+  // }
+  // specificationCount() {
+  //   return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications/count'));
+  // }
 
-     searchByplateNumber(plateNumber: string) {
-        return this.http.get(this.applicationConfigService.getEndpointFor('api/appusers?plateNumber.equals=' + plateNumber));
-     }
+  searchByplateNumber(plateNumber: string) {
+    return this.http.get(this.applicationConfigService.getEndpointFor('api/appusers?plateNumber.equals=' + plateNumber));
+  }
 
   authenticate(identity: Account | null): void {
     this.userIdentity = identity;

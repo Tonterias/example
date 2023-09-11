@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -5,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { IAppuser } from 'app/entities/appuser/appuser.model';
 
 @Component({
   selector: 'jhi-home',
@@ -15,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
 
   plateNumber: string = "";
+  appuser: IAppuser | undefined;
+  
   private readonly destroy$ = new Subject<void>();
 
   constructor(private accountService: AccountService, private router: Router) {}
@@ -35,11 +40,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-
   searchByplateNumber(): void {
     console.log(this.plateNumber)
-    this.accountService.searchByplateNumber(this.plateNumber).subscribe((data) => {
-      console.log(data)
-    })
+    this.accountService.searchByplateNumber(this.plateNumber).subscribe((data: any) => {
+      if (data) {
+        this.appuser = data[0] as IAppuser;
+      }
+    });
   }
 }
