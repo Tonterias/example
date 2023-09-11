@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -8,6 +9,8 @@ import { takeUntil } from 'rxjs/operators';
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
 import { IAppuser } from 'app/entities/appuser/appuser.model';
+import { INotification } from 'app/entities/notification/notification.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'jhi-home',
@@ -17,6 +20,7 @@ import { IAppuser } from 'app/entities/appuser/appuser.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
 
+  private notification: INotification | undefined;
   plateNumber: string = "";
   appuser: IAppuser | undefined;
   
@@ -47,5 +51,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.appuser = data[0] as IAppuser;
       }
     });
+  }
+
+  public create (): void{
+    console.log("Clicked");
+    console.log(this.notification);
   }
 }

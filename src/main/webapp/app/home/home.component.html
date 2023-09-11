@@ -15,42 +15,42 @@
     <div class="table-responsive table-entities" id="entities" *ngIf="appuser">
       <table class="table table-striped" aria-describedby="page-heading">
         <thead>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.date">Date</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.plateNumber">Plate Number</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.firstName">First Name</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.lastName">Last Name</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.email">Email</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.user">User</span>
-              </div>
-            </th>
-            <th scope="col"></th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.date">Date</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.plateNumber">Plate Number</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.firstName">First Name</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.lastName">Last Name</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.email">Email</span>
+            </div>
+          </th>
+          <th scope="col">
+            <div class="d-flex">
+              <span jhiTranslate="exampleApp.appuser.user">User</span>
+            </div>
+          </th>
+          <th scope="col"></th>
         </thead>
         <tbody>
           <tr>
@@ -67,5 +67,36 @@
         </tbody>
       </table>
     </div>
+    <!-- FORM -->
+    <div class="card bg-dark text white">
+      <div class="card-reader" *ngIf="appuser"> Create notification for plate number: {{ appuser.plateNumber }} </div>
+      <div class="card-body">
+        
+        <form (ngSubmit) = "create()">
+          <div class="form-group row">
+            <label for="message" class="col-form-label col-sm-2"> </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" [(ngModel)]="notification.message" name="message">
+            </div>
+          </div>
+        </form>
+        <form>
+          <div class="form-group row">
+            <label for="status" class="col-form-label col-sm-2"> </label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" [(ngModel)]="notification.status" name="status">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
 
-</div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <button class="btn btn-primary" role="button"> Create Notification
+
+        </button>
+      </div>
+    </div>
+
+  </div>
