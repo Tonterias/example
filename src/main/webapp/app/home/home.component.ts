@@ -14,6 +14,7 @@ import { Account } from 'app/core/auth/account.model';
 export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
 
+  plateNumber: string = "";
   private readonly destroy$ = new Subject<void>();
 
   constructor(private accountService: AccountService, private router: Router) {}
@@ -32,5 +33,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+
+  searchByplateNumber(): void {
+    console.log(this.plateNumber)
+    this.accountService.searchByplateNumber(this.plateNumber).subscribe((data) => {
+      console.log(data)
+    })
   }
 }

@@ -29,6 +29,21 @@ export class AccountService {
     return this.http.post(this.applicationConfigService.getEndpointFor('api/account'), account);
   }
 
+  specification() {
+  //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.contains=INCOURSE'));
+      return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.equals=INCOURSE'));
+  //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications/count'));
+    }
+     specificationCount() {
+    //     return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.contains=INCOURSE'));
+  //       return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications?id.greaterThan=5&status.equals=INCOURSE'));
+        return this.http.get(this.applicationConfigService.getEndpointFor('api/notifications/count'));
+      }
+
+     searchByplateNumber(plateNumber: string) {
+        return this.http.get(this.applicationConfigService.getEndpointFor('api/appusers?plateNumber.equals=' + plateNumber));
+     }
+
   authenticate(identity: Account | null): void {
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
