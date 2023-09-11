@@ -30,8 +30,12 @@ public class Appuser implements Serializable {
     @Column(name = "date", nullable = false)
     private Instant date;
 
+    // @NotNull
+    // @Column(name = "plate_number", nullable = false)
+    // private String plateNumber;
+    // NOTE: I have made the plate number unique.
     @NotNull
-    @Column(name = "plate_number", nullable = false)
+    @Column(name = "plate_number", nullable = false, unique = true)
     private String plateNumber;
 
     @Column(name = "first_name")
