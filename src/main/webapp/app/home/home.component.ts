@@ -3,11 +3,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { AppuserService } from 'app/entities/appuser/service/appuser.service';
+import { Message } from 'app/entities/enumerations/message.model';
+import { Status } from 'app/entities/enumerations/status.model';
+
+
+import dayjs from 'dayjs/esm';
+
 import { PlateSearchFormService, PlateSearchFromGroup } from './plate-search-form.service';
+import { NotificationService } from '../entities/notification/service/notification.service';
+import { INotification, NewNotification } from '../entities/notification/notification.model';
+import { IAppuser } from '../entities/appuser/appuser.model';
+import { HttpResponse } from '@angular/common/http';
 
 
 @Component({
@@ -24,12 +35,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
 
   plateExists = false;
+  appUser: any = null;
+
+  notification: INotification | null = null;
 
   plateForm : PlateSearchFromGroup = this.plateNumberFormService.createPlateSearchFormGroup();
-  
+  messageValues = Object.keys(Message);
+
   constructor(
     private accountService: AccountService,
+    protected appuserService: AppuserService,
     private router: Router, 
+    protected notificationService: NotificationService,
     protected plateNumberFormService: PlateSearchFormService) {}
 
   ngOnInit(): void {
@@ -58,8 +75,27 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.plateExists = false;
       }else{
         this.plateExists = true;
+        this.appUser = data[0];
       }
     })
 
   }
+
+  sendNotification(): void {
+    console.log("Send notification")
+    const currentTime = dayjs();
+    const notification: NewNotification = {
+      id: null,
+      date: currentTime,
+      message: this.plateForm.value.message,
+      status: Status['INMACULATE'],
+      appuser: this.appUser
+    }
+    this.notificationService.create(notification).subscribe((data) => {
+      console.log("Notification created from home page")
+    }, (error) => {
+      console.log("Error " + error)
+    })
+  }
+
 }
