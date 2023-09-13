@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/auth/account.model';
+import { PlateSearchFormService, PlateSearchFromGroup } from './plate-search-form.service';
 
 @Component({
   selector: 'jhi-home',
@@ -17,7 +18,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   plateNumber: string = "";
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private accountService: AccountService, private router: Router) {}
+  plateExists = false;
+
+  plateForm : PlateSearchFromGroup = this.plateNumberFormService.createPlateSearchFormGroup();
+  
+  constructor(
+    private accountService: AccountService,
+    private router: Router, 
+    protected plateNumberFormService: PlateSearchFormService) {}
 
   ngOnInit(): void {
     this.accountService
@@ -37,9 +45,16 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   searchByplateNumber(): void {
-    console.log(this.plateNumber)
-    this.accountService.searchByplateNumber(this.plateNumber).subscribe((data) => {
+    console.log(this.plateForm)
+    console.log("====> " + this.plateForm.get('plateNumber'))
+    console.log("====> " + this.plateForm.value.plateNumber)
+    this.accountService.searchByplateNumber(this.plateForm.value.plateNumber).subscribe((data: any) => {
       console.log(data)
+      if(data.length == 0){
+        this.plateExists = false;
+      }else{
+        this.plateExists = true;
+      }
     })
   }
 }
