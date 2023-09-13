@@ -21,3 +21,20 @@ Main page styles
     background-size: contain;
   }
 }
+
+.row-container {
+  display: flex;
+  align-items: center;
+}
+
+.label-col {
+  margin-right: 38px; 
+}
+
+.input-col {
+  margin-right: 62px; /* Add margin between the input and button */
+}
+
+.button-col {
+  flex: 1;
+}

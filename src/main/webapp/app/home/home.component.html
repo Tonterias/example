@@ -4,68 +4,54 @@
   </div>
 
   <div class="col-md-9">
-    <h1 class="display-4"><span jhiTranslate="home.title">Welcome, Java Hipster!</span> (Example)</h1>
 
-    <div>
-      <input [(ngModel)]="plateNumber" type="text">
-      <button (click)="searchByplateNumber()">Search by plate</button>
-    </div>
+    <form name="editForm" role="form" (ngSubmit)="searchByplateNumber()" novalidate [formGroup]="plateForm">
+       
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+    
+        <div class="row-container">
+          <div class="label-col">
+            <label class="form-label" for="field_id">Introduce plateNumber</label>
+          </div>
+          <div class="input-col">
+            <input type="text" name="id" data-cy="id" formControlName="plateNumber"/>
+          </div>
+          <div class="button-col">
+            <button
+              type="submit"
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="plateForm.invalid"
+              class="btn btn-primary"
+            >
+              Check plate number
+            </button>
+          </div>
+        </div>
 
+        <ng-template [ngIf]="!plateExists" [ngIfElse]="message">
+          <div>
+            <p>There is no plate number</p>
+          </div>
+        </ng-template>
+        
+        <ng-template #message>
+          <div class="row-container">
+            <div class="label-col">
+              <label class="form-label" for="field_date">Message</label>
+            </div> 
+            <div class="input-col">
+              <textarea cols="60" rows="4"></textarea>
+            
+            </div>
+          </div>
+        </ng-template>
+ 
 
-    <div class="table-responsive table-entities" id="entities" *ngIf="appuser">
-      <table class="table table-striped" aria-describedby="page-heading">
-        <thead>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="global.field.id">ID</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.date">Date</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.plateNumber">Plate Number</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.firstName">First Name</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.lastName">Last Name</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.email">Email</span>
-              </div>
-            </th>
-            <th scope="col">
-              <div class="d-flex">
-                <span jhiTranslate="exampleApp.appuser.user">User</span>
-              </div>
-            </th>
-            <th scope="col"></th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{{ appuser.id }}</td>
-            <td>{{ appuser.date }}</td>
-            <td>{{ appuser.plateNumber }}</td>
-            <td>{{ appuser.firstName }}</td>
-            <td>{{ appuser.lastName }}</td>
-            <td>{{ appuser.email }}</td>
-            <td>
-              {{ appuser.user?.id }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        </div>
+    </form>
+  
+  </div>
 
 </div>
