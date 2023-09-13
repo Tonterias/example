@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-md-9">
-    <form name="editForm" role="form" (ngSubmit)="searchByplateNumber()" novalidate [formGroup]="plateForm">
+    <form name="editForm" role="form" novalidate [formGroup]="plateForm">
        
       <div>
         <jhi-alert-error></jhi-alert-error>
@@ -18,10 +18,9 @@
           </div>
           <div class="button-col">
             <button
-              type="submit"
               id="save-entity"
               data-cy="entityCreateSaveButton"
-              [disabled]="plateForm.invalid"
+              (click)="searchByplateNumber()"
               class="btn btn-primary"
             >
               Check plate number
@@ -36,14 +35,36 @@
         </ng-template>
         
         <ng-template #message>
-          <div class="row-container">
+          <div class="row-container message">
             <div class="label-col">
               <label class="form-label" for="field_date">Message</label>
             </div> 
-            <div class="input-col">
-              <textarea cols="60" rows="4"></textarea>
-            
+            <div class="input-col-select">
+              <div class="row mb-3">
+                <select
+                  class="form-control"
+                  id="field_appuser"
+                  data-cy="appuser"
+                  name="appuser"
+                  formControlName="message"
+                >
+                <option [ngValue]="null">{{ 'exampleApp.Message.null' | translate }}</option>
+                <option *ngFor="let message of messageValues" [value]="message">{{ 'exampleApp.Message.' + message | translate }}</option>
+         
+                </select>
+              </div>
             </div>
+          </div>
+          <div class="button-col">
+            <button
+              id="save-entity"
+              data-cy="entityCreateSaveButton"
+              [disabled]="plateForm.invalid"
+              (click)="sendNotification()"
+              class="btn btn-primary"
+            >
+              Send Notification
+            </button>
           </div>
         </ng-template>
  

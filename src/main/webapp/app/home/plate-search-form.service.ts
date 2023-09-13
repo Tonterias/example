@@ -9,10 +9,10 @@ export class PlateSearchFormService {
     createPlateSearchFormGroup() {
 
         return new FormGroup({
-            plateNumber: new FormControl('', [Validators.required])
+            plateNumber: new FormControl('', [Validators.required]),
+            message: new FormControl('', [Validators.required])
         })
 
     }
-
-
+ 
 }
