@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -18,6 +20,7 @@ import { INotification, NewNotification } from '../entities/notification/notific
 import { IAppuser } from '../entities/appuser/appuser.model';
 import { HttpResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'jhi-home',
   templateUrl: './home.component.html',
@@ -27,6 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   account: Account | null = null;
 
   plateNumber: string = "";
+  appuser: IAppuser | undefined;
+  
   private readonly destroy$ = new Subject<void>();
 
   plateExists = false;
@@ -60,7 +65,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-
   searchByplateNumber(): void {
     console.log(this.plateForm)
     console.log("====> " + this.plateForm.get('plateNumber'))
@@ -74,6 +78,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.appUser = data[0];
       }
     })
+
   }
 
   sendNotification(): void {
